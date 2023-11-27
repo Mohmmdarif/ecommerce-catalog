@@ -1,28 +1,78 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div
+      :class="
+        !ProductAvailable
+          ? 'bg__unavailable__color'
+          : currentProduct.category === 'men\'s clothing'
+          ? 'bg__color__men'
+          : 'bg__color__women'
+      "
+      class="container flex justify__center items__center"
+    >
+      <ProductDisplayMen
+        :product="currentProduct"
+        @next-product="showNextProduct"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ProductDisplayMen from "./components/ProductDisplayMen.vue";
+import "../src/assets/style/custom.css";
+import axios from "axios";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
-</script>
+    ProductDisplayMen,
+  },
+  props: [],
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  data() {
+    return {
+      products: [],
+      currentProduct: {}, // Produk yang sedang ditampilkan
+      currentIndex: 0, // Indeks produk yang sedang ditampilkan
+      ProductAvailable: false,
+    };
+  },
+  methods: {
+    setProduct(data) {
+      this.products = data;
+      // Menampilkan produk pertama
+      this.currentProduct = this.products[this.currentIndex];
+      this.setAvailability();
+    },
+    showNextProduct() {
+      // Kembali ke index awal jika sudah mencapai batas index
+      this.currentIndex = (this.currentIndex + 1) % this.products.length;
+      // Menampilkan produk berikutnya
+      this.currentProduct = this.products[this.currentIndex];
+      this.setAvailability();
+    },
+    setAvailability() {
+      const product = this.currentProduct;
+      if (
+        product.category === "men's clothing" ||
+        product.category === "women's clothing"
+      ) {
+        this.ProductAvailable = true;
+      } else {
+        this.ProductAvailable = false;
+      }
+    },
+  },
+  mounted() {
+    axios
+      .get(`https://fakestoreapi.com/products`)
+      .then((response) => {
+        this.setProduct(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+};
+</script>
