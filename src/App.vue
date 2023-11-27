@@ -10,8 +10,15 @@
       "
       class="container flex justify__center items__center"
     >
-      <ProductDisplayMen
+      <ProductDisplay
+        v-if="ProductAvailable"
         :product="currentProduct"
+        @next-product="showNextProduct"
+      />
+      <UnavailableProduct
+        v-else
+        :product="currentProduct"
+        :ProductAvailable="ProductAvailable"
         @next-product="showNextProduct"
       />
     </div>
@@ -19,14 +26,16 @@
 </template>
 
 <script>
-import ProductDisplayMen from "./components/ProductDisplayMen.vue";
+import ProductDisplay from "./components/ProductDisplay.vue";
+import UnavailableProduct from "./components/UnavailableProduct.vue";
 import "../src/assets/style/custom.css";
 import axios from "axios";
 
 export default {
   name: "App",
   components: {
-    ProductDisplayMen,
+    ProductDisplay,
+    UnavailableProduct,
   },
   props: [],
 

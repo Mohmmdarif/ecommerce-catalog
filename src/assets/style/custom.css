@@ -2,14 +2,18 @@
 
 :root {
   --bg-card: #FFFFFF;
+
   /* Mens Card */
   --bg-men-card: #D6E6FF;
   --base-color-men: #002772;
   /* end Mens Card */
 
+  /* Womens Card */
   --bg-women-card: #FDE2FF;
   --base-color-women: #720060;
+  /* end Womens Card */
 
+  /* Unavailable-color */
   --bg-unavailable-color: #D8D7D7;
 
   /* Desktop */
@@ -22,6 +26,7 @@
   --fs-header-mobile: 20px;
   --fs-category-mobile: 12px;
   --fs-description-mobile: 14px;
+  /* end Mobile */
 }
 
 * {
@@ -53,6 +58,14 @@ hr {
   border: 1px solid #dcdcdc;
 }
 
+.color__men {
+  color: var(--base-color-men);
+}
+
+.color__women {
+  color: var(--base-color-women);
+}
+
 .bg__unavailable__color {
   background: linear-gradient(
     to bottom, 
@@ -80,6 +93,65 @@ hr {
   var(--bg-card) 100%);
 }
 
+/* Unavailable */
+.display-none {
+  display: none;
+}
+
+.display-yes {
+  display: block;
+}
+
+.card-unavailable {
+  width: 100%;
+  height: 580px;
+  max-height: fit-content;
+  background-image: url("../sad-background.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-color: var(--bg-card);
+  flex-shrink: 0;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* display: none; */
+}
+
+.btn-unavailable {
+  max-width: 465px;
+  width: 100%;
+  height: 42px;
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 13px;
+  color: black;
+  background-color: var(--bg-card);
+  border: 3px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-unavailable:hover {
+  opacity: 0.8;
+  transition: all 0.3s ease-in-out;
+}
+
+.unavailable-message {
+  color: black;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.row-unavailable {
+  left: 33%;
+  top: 50%;
+  text-align: center;
+}
+
+/* Card */
 .card {
   width: 65%;
   height: 580px;
@@ -95,11 +167,14 @@ hr {
   height: 100%;
   border-radius: 10px 0 0;
   padding-left: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 img {
   width: 100%;
-  height: 100%;
+  height: 90%;
   object-fit: scale-down;
 }
 
@@ -115,7 +190,6 @@ img {
 .title__product {
   font-size: var(--fs-header);
   font-weight: 600;
-  color: var(--base-color-men);
   margin-bottom: 17px;
 }
 
@@ -142,7 +216,6 @@ img {
 .price__product {
   font-size: var(--fs-header);
   font-weight: 600;
-  color: var(--base-color-men);
   margin: 16px 0;
 }
 
@@ -150,27 +223,28 @@ img {
   width: 45%;
   height: 42px;
   border-radius: 4px;
-  color: #FFFFFF;
-  background-color: var(--base-color-men);
   font-weight: 500;
   font-size: var(--fs-description);
   cursor: pointer;
 }
 
-.color__men {
-  color: var(--base-color-men);
+button:hover {
+  opacity: 0.8;
+  transition: all 0.3s ease-in-out;
 }
 
-.color__women {
-  color: var(--base-color-women);
+.button__color {
+  color: #FFFFFF;
 }
 
 .button__men__color {
   background-color: var(--base-color-men);
+  border: 3px solid var(--base-color-men);
 }
 
 .button__women__color {
   background-color: var(--base-color-women);
+  border: 3px solid var(--base-color-women);
 }
 
 .button__next {
@@ -223,7 +297,6 @@ img {
   .title__product {
     font-size: var(--fs-header-mobile);
     font-weight: 600;
-    color: var(--base-color-men);
     margin-bottom: 10px;
   }
 
@@ -252,7 +325,6 @@ img {
   .price__product {
     font-size: var(--fs-header-mobile);
     font-weight: 600;
-    color: var(--base-color-men);
     margin-bottom: 10px;
   }
 
@@ -263,7 +335,6 @@ img {
     margin-bottom: 10px;
     border-radius: 4px;
     color: #FFFFFF;
-    background-color: var(--base-color-men);
     font-weight: 500;
     font-size: var(--fs-description-mobile);
     cursor: pointer;
@@ -271,6 +342,61 @@ img {
 
   .button__next {
     background-color: #FFFFFF;
-    color: var(--base-color-men);
+  }
+
+  .display-none {
+    display: none;
+  }
+
+  .display-yes {
+    display: block;
+  }
+  
+  .card-unavailable {
+    width: 100%;
+    height: 580px;
+    max-height: fit-content;
+    background-image: url("../sad-background.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: var(--bg-card);
+    flex-shrink: 0;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .btn-unavailable {
+    max-width: 465px;
+    width: 70%;
+    height: 35px;
+    font-size: var(--fs-description-mobile);
+    font-weight: 600;
+    margin-top: 13px;
+    color: black;
+    background-color: var(--bg-card);
+    border: 3px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-unavailable:hover {
+    opacity: 0.8;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .unavailable-message {
+    color: black;
+    font-weight: 400;
+    font-size: var(--fs-description-mobile);
+  }
+  
+  .row-unavailable {
+    left: 33%;
+    top: 50%;
+    text-align: center;
   }
 }
