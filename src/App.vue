@@ -10,8 +10,11 @@
       "
       class="container flex justify__center items__center"
     >
+      <div v-if="loading">
+        <Loader />
+      </div>
       <ProductDisplay
-        v-if="ProductAvailable"
+        v-if="ProductAvailable && !loading"
         :product="currentProduct"
         @next-product="showNextProduct"
       />
@@ -26,9 +29,10 @@
 </template>
 
 <script>
+import "../src/assets/style/custom.css";
 import ProductDisplay from "./components/ProductDisplay.vue";
 import UnavailableProduct from "./components/UnavailableProduct.vue";
-import "../src/assets/style/custom.css";
+import Loader from "./components/Loader.vue";
 import axios from "axios";
 
 export default {
@@ -36,6 +40,7 @@ export default {
   components: {
     ProductDisplay,
     UnavailableProduct,
+    Loader,
   },
   props: [],
 
@@ -45,6 +50,7 @@ export default {
       currentProduct: {}, // Produk yang sedang ditampilkan
       currentIndex: 0, // Indeks produk yang sedang ditampilkan
       ProductAvailable: false,
+      loading: false,
     };
   },
   methods: {
@@ -55,11 +61,17 @@ export default {
       this.setAvailability();
     },
     showNextProduct() {
+      this.loading = true;
+
       // Kembali ke index awal jika sudah mencapai batas index
       this.currentIndex = (this.currentIndex + 1) % this.products.length;
       // Menampilkan produk berikutnya
       this.currentProduct = this.products[this.currentIndex];
       this.setAvailability();
+
+      setTimeout(() => {
+        this.loading = false;
+      }, 1000);
     },
     setAvailability() {
       const product = this.currentProduct;

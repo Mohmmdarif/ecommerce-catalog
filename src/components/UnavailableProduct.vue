@@ -18,6 +18,6 @@ import "../assets/style/custom.css";
 
 export default {
   name: "UnavailableProduct",
-  props: ["product", "ProductAvailable"],
+  props: ["product", "ProductAvailable", "loading"],
 };
 </script>
